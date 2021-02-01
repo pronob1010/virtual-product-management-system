@@ -37,12 +37,25 @@ class card(models.Model):
         return self.card_tittle
 
 class sold_card(models.Model):
-    sold_card_tittle = models.CharField(max_length=150)
-    sold_card_type = models.ForeignKey(card_categories, null=True,blank=True, on_delete=models.CASCADE)
-    sold_card_selling_price= models.FloatField()
+    sold_card_customer = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer_history', null=True, blank=True)
+    sold_card_tittle = models.ForeignKey(card, on_delete=models.CASCADE, related_name='customer_card_tittle_history',null=True , blank=True)
+    sold_card_type = models.ForeignKey(card, on_delete=models.CASCADE, related_name='customer_card_type_history', null=True , blank=True)
+    sold_card_selling_price= models.ForeignKey(card, on_delete=models.CASCADE, null=True ,related_name='customer_card_price_history', blank=True)
+    sold_card_time = models.DateTimeField(default=now)
+    
+    def __str__(self):
+        return self.sold_card_tittle.card_tittle
+    
+    def __str__(self):
+        return self.sold_card_type.card_type
+
+    def __str__(self):
+        return self.sold_card_selling_price.card_selling_price
+    
 
     def slug(self):
         return slugify(self.sold_card_tittle)
 
     def __str__(self):
         return self.sold_card_tittle
+
