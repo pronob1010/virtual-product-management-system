@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.models import User
+# from autoslug import AutoSlugField
 from django.template.defaultfilters import slugify
 
 class UserProfile(models.Model):
@@ -26,36 +27,24 @@ class card_categories(models.Model):
 
 class card(models.Model):
     card_tittle = models.CharField(max_length=150)
+    # slug = AutoSlugField(max_length=100,populate_from=card_tittle, default=card_tittle)
     card_type = models.ForeignKey(card_categories, null=True,blank=True, on_delete=models.CASCADE)
     card_selling_price= models.FloatField()
+    card_used = models.BooleanField(default=False)
     card_description = models.TextField(max_length=1000)
 
-    def slug(self):
-        return slugify(self.card_tittle)
 
     def __str__(self):
         return self.card_tittle
 
 class sold_card(models.Model):
-    sold_card_customer = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer_history', null=True, blank=True)
-    sold_card_tittle = models.ForeignKey(card, on_delete=models.CASCADE, related_name='customer_card_tittle_history',null=True , blank=True)
-    sold_card_type = models.ForeignKey(card, on_delete=models.CASCADE, related_name='customer_card_type_history', null=True , blank=True)
-    sold_card_selling_price= models.ForeignKey(card, on_delete=models.CASCADE, null=True ,related_name='customer_card_price_history', blank=True)
+    sold_card_customer = models.ManyToManyField(User, null=True, blank=True)
+    sold_card = models.OneToOneField(card,on_delete=models.CASCADE, null=True,blank= True)
     sold_card_time = models.DateTimeField(default=now)
-    
-    def __str__(self):
-        return self.sold_card_tittle.card_tittle
-    
-    def __str__(self):
-        return self.sold_card_type.card_type
 
-    def __str__(self):
-        return self.sold_card_selling_price.card_selling_price
-    
-
-    def slug(self):
-        return slugify(self.sold_card_tittle)
 
     def __str__(self):
         return self.sold_card_tittle
+
+# class customer_input(models.Model):
 

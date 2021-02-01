@@ -1,1 +1,22 @@
+{% load static %}
 <h2>project start</h2>
+<div>
+<center>
+  <h1>Card List</h1>
+  <div>
+    <a href="#">
+      <div>
+        {% for c in cardlist %}
+        <hr>
+        <h1>{{ c.card_tittle}}</h1>
+        <h3>{{c.card_type}}</h3> 
+        <button>
+        <a href="{% url 'process' c.id%}">Buy Now</a>
+        </button>
+        <hr>
+        {% endfor %}
+      </div>
+    </a>
+    </center>
+  </div>
+</div>
