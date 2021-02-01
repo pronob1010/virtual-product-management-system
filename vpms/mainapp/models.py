@@ -46,5 +46,10 @@ class sold_card(models.Model):
     def __str__(self):
         return self.sold_card_tittle
 
-# class customer_input(models.Model):
+class customer_input(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    quantity = models.IntegerField()
+    trxid = models.CharField(max_length=100)
+    comment = models.TextField(max_length=150, default=None)
+
 
