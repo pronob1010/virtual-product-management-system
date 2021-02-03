@@ -29,7 +29,7 @@ class card(models.Model):
     card_tittle = models.CharField(max_length=150)
     # slug = AutoSlugField(max_length=100,populate_from=card_tittle, default=card_tittle)
     card_type = models.ForeignKey(card_categories, null=True,blank=True, on_delete=models.CASCADE)
-    card_selling_price= models.FloatField()
+    card_selling_price= models.FloatField(default=None)
     card_used = models.BooleanField(default=False)
     card_description = models.TextField(max_length=1000)
 
@@ -45,11 +45,5 @@ class customer_input(models.Model):
     order_price = models.FloatField(null=True)
 
     def __str__(self):
-        return self.id
-# class sold_card(models.Model):
-#     sold_card_customer = models.ManyToManyField(User, null=True, blank=True)
-#     sold_card = models.OneToOneField(card,on_delete=models.CASCADE, null=True,blank= True)
-#     sold_card_time = models.DateTimeField(default=now)
-
-#     def __str__(self):
-#         return self.sold_card_tittle
+        return self.customer.username
+    

@@ -1,22 +1,29 @@
-{% load static %}
 <h2>project start</h2>
+{% if user.is_authenticated %}
+<button>
+  <a href="{% url 'logout' %}"> logout</a>
+</button>
+{% else %}
+<button>
+  <a href="{% url 'login' %}"> login</a><span>
+  <a href="{% url 'register' %}"> Register</a></span>
+</button>
+{% endif %}
 <div>
-<center>
-  <h1>Card List</h1>
-  <div>
-    <a href="#">
-      <div>
-        {% for c in cardlist %}
-        <hr>
-        <h1>{{ c.card_tittle}}</h1>
-        <h3>{{c.card_type}}</h3> 
-        <button>
-        <a href="{% url 'process' c.id %}">Buy Now</a>
-        </button>
-        <hr>
-        {% endfor %}
-      </div>
-    </a>
-    </center>
-  </div>
+    <h1>Card List</h1>
+    <div>
+      <a href="#">
+        <div>
+          {% for c in cardlist %}
+          <hr>
+          <h1>{{ c.card_tittle}}</h1>
+          <h3>{{c.card_type}}</h3>
+          <button>
+            <a href="{% url 'process' c.id %}">Buy Now</a>
+          </button>
+          <hr>
+          {% endfor %}
+        </div>
+      </a>
+</div>
 </div>
