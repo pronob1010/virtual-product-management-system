@@ -50,6 +50,6 @@ class customer_input(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     quantity = models.IntegerField()
     trxid = models.CharField(max_length=100)
-    comment = models.TextField(max_length=150, default=None)
+    # comment = models.TextField(max_length=150, default=None)
 
 
