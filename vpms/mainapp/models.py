@@ -37,19 +37,19 @@ class card(models.Model):
     def __str__(self):
         return self.card_tittle
 
-class sold_card(models.Model):
-    sold_card_customer = models.ManyToManyField(User, null=True, blank=True)
-    sold_card = models.OneToOneField(card,on_delete=models.CASCADE, null=True,blank= True)
-    sold_card_time = models.DateTimeField(default=now)
-
+class customer_input(models.Model):
+    product = models.ForeignKey(card, on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    quantity = models.IntegerField()
+    order_time = models.DateTimeField(default=now)
+    order_price = models.FloatField(null=True)
 
     def __str__(self):
-        return self.sold_card_tittle
+        return self.id
+# class sold_card(models.Model):
+#     sold_card_customer = models.ManyToManyField(User, null=True, blank=True)
+#     sold_card = models.OneToOneField(card,on_delete=models.CASCADE, null=True,blank= True)
+#     sold_card_time = models.DateTimeField(default=now)
 
-class customer_input(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
-    quantity = models.IntegerField()
-    trxid = models.CharField(max_length=100)
-    # comment = models.TextField(max_length=150, default=None)
-
-
+#     def __str__(self):
+#         return self.sold_card_tittle
