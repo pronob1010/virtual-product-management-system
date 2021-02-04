@@ -5,25 +5,29 @@
 </button>
 {% else %}
 <button>
-  <a href="{% url 'login' %}"> login</a><span>
-  <a href="{% url 'register' %}"> Register</a></span>
+  <a href="{% url 'login' %}"> login</a>
 </button>
+<span>
+  <button>
+    <a href="{% url 'register' %}"> Register</a>
+  </button>
+</span>
 {% endif %}
 <div>
-    <h1>Card List</h1>
-    <div>
-      <a href="#">
-        <div>
-          {% for c in cardlist %}
-          <hr>
-          <h1>{{ c.card_tittle}}</h1>
-          <h3>{{c.card_type}}</h3>
-          <button>
-            <a href="{% url 'process' c.id %}">Buy Now</a>
-          </button>
-          <hr>
-          {% endfor %}
-        </div>
-      </a>
-</div>
+  <h1>Card List</h1>
+  <div>
+    <a href="#">
+      <div>
+        {% for c in cardlist %}
+        <hr>
+        <h1>{{ c.card_tittle}}</h1>
+        <h3>{{c.card_type}}</h3>
+        <button>
+          <a href="{% url 'process' c.id %}">Buy Now</a>
+        </button>
+        <hr>
+        {% endfor %}
+      </div>
+    </a>
+  </div>
 </div>

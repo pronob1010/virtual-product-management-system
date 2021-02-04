@@ -11,9 +11,9 @@ class UserProfile(models.Model):
         ('Transgender','Transgender')
         )
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
-    Gender = models.CharField(max_length=100, choices=TYPE,default=None)
-    phone = models.CharField(max_length=15)
-    self_bio = models.TextField(max_length=150)
+    Gender = models.CharField(max_length=100, choices=TYPE,default=None, blank=True)
+    phone = models.CharField(max_length=15, default=None, null=True, blank=True) 
+    self_bio = models.TextField(max_length=150,default=None, null=True, blank=True)
 
 class card_categories(models.Model):
     tittle = models.CharField(max_length=100)
@@ -26,12 +26,12 @@ class card_categories(models.Model):
         return self.tittle
 
 class card(models.Model):
-    card_tittle = models.CharField(max_length=150)
+    card_tittle = models.CharField(max_length=150, default=None, null=True)
     # slug = AutoSlugField(max_length=100,populate_from=card_tittle, default=card_tittle)
     card_type = models.ForeignKey(card_categories, null=True,blank=True, on_delete=models.CASCADE)
     card_selling_price= models.FloatField(default=None)
-    card_used = models.BooleanField(default=False)
-    card_description = models.TextField(max_length=1000)
+    card_used = models.BooleanField(default=False, blank=True)
+    card_description = models.TextField(max_length=1000, default=None, null=True, blank=True)
 
 
     def __str__(self):

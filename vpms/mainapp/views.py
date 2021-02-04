@@ -49,7 +49,6 @@ def index(request):
 from . forms import customer_input_form
 def process(request, id):
     c_info = get_object_or_404(card, id=id)
-    print(c_info.card_tittle)
     if request.method == "POST":
         form = customer_input_form(request.POST)
         if form.is_valid():
@@ -67,8 +66,11 @@ def process(request, id):
 
 # from . forms import customer_input
 def success(request):
+    # data = get_object_or_404(customer_input, id=id)
     key_id="rzp_test_sSj3DF8kI97bSo" 
     key_secret="UtzDhOevixD28yF1DyrakRv1"
+
+    # print(data)
 
     import razorpay 
     client = razorpay.Client(auth=(key_id, key_secret))
